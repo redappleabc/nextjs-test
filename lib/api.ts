@@ -128,3 +128,23 @@ export async function getPostAndMorePosts(
     morePosts: extractPostEntries(entries),
   };
 }
+export async function getCreators(): Promise<any[]> {
+  const entries = await fetchGraphQL(
+    `query {
+      contentCreatorCollection(where: { name_exists: true }, order: name_ASC) {
+        items {
+          name
+          bio {
+            json
+          }
+          socialLinks
+          profileImage {
+            url
+          }
+        }
+      }
+    }`,
+    false,
+  );
+  return entries?.data?.contentCreatorCollection?.items || [];
+}
