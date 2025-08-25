@@ -11,19 +11,19 @@ import { getAllPosts, getPostAndMorePosts } from "@/lib/api";
 
 export async function generateStaticParams() {
   const allPosts = await getAllPosts(false);
-
   return allPosts.map((post) => ({
     slug: post.slug,
   }));
 }
 
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function PostPage({ params }: PageProps) {
+  const { slug } = await params; // Unwrap the Promise
   const { isEnabled } = draftMode();
-  const { post, morePosts } = await getPostAndMorePosts(params.slug, isEnabled);
+  const { post, morePosts } = await getPostAndMorePosts(slug, isEnabled);
 
   return (
     <div className="container mx-auto px-5">
@@ -55,7 +55,6 @@ export default async function PostPage({
             <Date dateString={post.date} />
           </div>
         </div>
-
         <div className="mx-auto max-w-2xl">
           <div className="prose">
             <Markdown content={post.content} />
