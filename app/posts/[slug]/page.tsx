@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { draftMode } from "next/headers";
-
 import MoreStories from "../../more-stories";
 import Avatar from "../../avatar";
 import Date from "../../date";
 import CoverImage from "../../cover-image";
-
 import { Markdown } from "@/lib/markdown";
 import { getAllPosts, getPostAndMorePosts } from "@/lib/api";
 
@@ -21,9 +19,13 @@ type PageProps = {
 };
 
 export default async function PostPage({ params }: PageProps) {
-  const { slug } = await params; // Unwrap the Promise
+  const { slug } = await params;
   const { isEnabled } = draftMode();
   const { post, morePosts } = await getPostAndMorePosts(slug, isEnabled);
+
+  if (!post) {
+    return <div>Post not found</div>;
+  }
 
   return (
     <div className="container mx-auto px-5">
@@ -43,7 +45,7 @@ export default async function PostPage({ params }: PageProps) {
           )}
         </div>
         <div className="mb-8 sm:mx-0 md:mb-16">
-          <CoverImage title={post.title} url={post.coverImage.url} />
+          <CoverImage title={post.title} url={post.featuredImage.url} />
         </div>
         <div className="mx-auto max-w-2xl">
           <div className="mb-6 block md:hidden">
@@ -52,8 +54,9 @@ export default async function PostPage({ params }: PageProps) {
             )}
           </div>
           <div className="mb-6 text-lg">
-            <Date dateString={post.date} />
+            <Date dateString={post.publishedDate} />
           </div>
+          <div className="mb-6">{post.subtitle}</div>
         </div>
         <div className="mx-auto max-w-2xl">
           <div className="prose">
