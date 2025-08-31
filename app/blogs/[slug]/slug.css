@@ -1,0 +1,18 @@
+.post-container {
+    font-size: 15px;
+    margin: 0px 33vw 0 33vw;
+    font-family: 'Karla', sans-serif;
+}
+
+.post-container-details h1 {
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.post-container-details div{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: var(--ast-body-line-height, 1.65);
+    color: #57626d;
+}

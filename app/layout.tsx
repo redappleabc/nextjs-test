@@ -1,3 +1,4 @@
+import Link from "next/link";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { EXAMPLE_PATH, CMS_NAME } from "@/lib/constants";
@@ -13,9 +14,27 @@ const inter = Inter({
   display: "swap",
 });
 
+function Header() {
+  return (
+    <div className="navigation">
+      <ul className="container header">
+      <li>
+        <Link href="/">Home</Link>
+      </li>
+      <li>
+        <Link href="/blogs">Learn Blogs</Link>
+      </li>
+      <li>
+        <Link href="/people">People</Link>
+      </li>
+    </ul>
+    </div>
+  )
+}
+
 function Footer() {
   return (
-    <footer className="bg-accent-1 border-t border-accent-2">
+    <footer className="bg-accent-1 border-accent-2">
       <div className="container mx-auto px-5">
         <div className="py-28 flex flex-col lg:flex-row items-center">
           <h3 className="text-4xl lg:text-5xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4 lg:w-1/2">
@@ -50,6 +69,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <body>
         <section className="min-h-screen">
+          <Header />
           <main>{children}</main>
           <Footer />
         </section>
