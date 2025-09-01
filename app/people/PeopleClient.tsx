@@ -60,7 +60,6 @@ export default function PeopleClient({ people }: { people: any[] }) {
 
         <div className="people-grid">
             {people.map((person) => {
-                randomIndex = Math.floor(Math.random() * icons.length);
                 return (
                     <div key={person.sys.id} className="card" onClick={() => openModal(person)}>
                         <img
@@ -69,7 +68,7 @@ export default function PeopleClient({ people }: { people: any[] }) {
                         className="card-image"
                         />
                         <div className="card-info">
-                            <h3>{icons[randomIndex]}{person.fields.name}</h3>
+                            <h3>{icons[3]}{person.fields.name}</h3>
                             <span>{person.fields.country}</span>
                             <p>{person.fields.status}</p>
                         </div>
@@ -83,7 +82,7 @@ export default function PeopleClient({ people }: { people: any[] }) {
                 <div>
                     <button className="close-btn" onClick={closeModal}>✖</button>
 
-                    <div className="icon">{icons[randomIndex]}</div>
+                    <div className="icon">{icons[3]}</div>
                     <h2>{selectedPerson.fields.name}</h2>
 
                     <p><strong><IconWorldPin className="tabler-icon" stroke={2} size={16}/> Location:</strong> <span> {selectedPerson.fields.country} </span></p>
