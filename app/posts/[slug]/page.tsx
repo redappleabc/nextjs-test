@@ -20,7 +20,7 @@ type PageProps = {
 
 export default async function PostPage({ params }: PageProps) {
   const { slug } = await params;
-  const { isEnabled } = draftMode();
+  const { isEnabled } = await draftMode();
   const { post, morePosts } = await getPostAndMorePosts(slug, isEnabled);
 
   if (!post) {
